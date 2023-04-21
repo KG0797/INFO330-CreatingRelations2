@@ -1,5 +1,13 @@
-CREATE TABLE Pokemon_abilities (pokedex_number INTEGER NOT NULL, ability TEXT NOT NULL, FOREIGN KEY(pokedex_number) REFERENCES pokemon(pokedex_number)
-INSERT INTO pokemon_abilities (pokemon_id, ability)
-SELECT id, TRIM(LOWER(ability)) AS ability
-From pokemon, json_each('[' || REPLACE(abilities, "'", "\"") || ']');
-
+WITH split (name, abilities, seperate_abilities) AS (
+SELECT (name, '' AS abilities, abilities||',' AS seperate_abilities
+FROM temp_p
+UNION ALL
+SELECT name,
+  substr(seperate_abilities, 0, instr(seperate_abilities, ',')) AS abilities,
+  substr(seperate_abilities, instr(seperate_abilities, ',') +1) AS seperate_abilities
+FROM split
+WHERE seperate_abilities != ''
+)
+SELECT name, abilities FROM split
+WHERE abilities != ''
+ORDER BY name;
