@@ -1,1 +1,0 @@
-CREATE TABLE Pokemon_1NF (id INTEGER PRIMARY KEY, name TEXT, type1
