@@ -1,29 +1,18 @@
 CREATE TABLE pokemon_abilities(
+pokedex_number INT PRIMARY KEY,
 name VARCHAR(255),
 ability VARCHAR(255),
 FOREIGN KEY (name) REFERENCES temp_p(name))
 
-INSERT INTO pokemon_abilities (name, ability)
-SELECT name, TRIM(SUBSTR(abilities, start, IFNULL(NULLIF(INSTR(abilities, ', ', start), 0), LENGTH(abilities) + 1) - start)) AS ability
-FROM (
-  SELECT name, REPLACE(abilities, '[', '') AS abilities, 1 AS start
-  FROM imported_pokemon_data
-) AS t
-WHERE abilities NOT LIKE '%]'
-UNION ALL
-SELECT name, TRIM(REPLACE(SUBSTR(abilities, INSTR(abilities, ', ') + 1), ']', '')) AS ability
-FROM imported_pokemon_data
-WHERE abilities LIKE '%]'
-ORDER BY name, ability;
-ALTER TABLE temp_p
+ALTER TABLE imported_pokemon_data
 DROP COLUMN abilties;
 
 
 
 
-WITH split (name, abilities, separate_abilities) AS (
+WITH RECURSIVE split (name, abilities, separate_abilities) AS (
 SELECT name, '' AS abilities, abilities||',' AS separate_abilities
-FROM temp_p
+FROM imported_pokemon_data
 UNION ALL
 SELECT name,
   substr(separate_abilities, 0, instr(separate_abilities, ',')) AS abilities,
@@ -31,7 +20,7 @@ SELECT name,
 FROM split
 WHERE separate_abilities != ''
 )
-SELECT name, abilities FROM split
-WHERE abilities != ''
-ORDER BY name;
+INSERT INTO pokemon_abilities(name, ability)
+SELECT name, TRIM(abilities) FROM split
+WHERE abilities != '';
 
