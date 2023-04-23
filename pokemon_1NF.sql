@@ -18,7 +18,8 @@ WHERE separate_abilities != ''
 )
 INSERT INTO pokemon_abilities(pokedex_number, name, ability)
 SELECT pokedex_number, name, abilities FROM split
-WHERE abilities != '';
+WHERE abilities != ''
+ORDER BY pokedex_number, name;
 
 ALTER TABLE imported_pokemon_data
 DROP COLUMN abilties;
