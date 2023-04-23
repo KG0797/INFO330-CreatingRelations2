@@ -3,16 +3,18 @@ name VARCHAR(255),
 ability VARCHAR(255),
 FOREIGN KEY (name) REFERENCES temp_p(name))
 
-INSERT INTO pokemon_abilities(name, ability)
-SELECT name, abilities
-FROM temp_p
-WHERE abilities LIKE '%,%';
-
 INSERT INTO pokemon_abilities (name, ability)
-SELECT name, SUBSTR(abilities, 1, LENGTH(abilities)-1)
-FROM temp_p
-WHERE abilities NOT LIKE '%,%';
-
+SELECT name, TRIM(SUBSTR(abilities, start, IFNULL(NULLIF(INSTR(abilities, ',', start), 0), LENGTH(abilities) + 1) - start))
+FROM (
+  SELECT name, abilities, 1 AS start
+  FROM temp_p
+  WHERE abilities LIKE '%,%'
+  UNION ALL
+  SELECT name, ability, 1 AS start
+  FROM temp_p
+  WHERE abilities NOT LIKE '%,%'
+) AS t
+ORDER BY name, start;
 ALTER TABLE temp_p
 DROP COLUMN abilties;
 
