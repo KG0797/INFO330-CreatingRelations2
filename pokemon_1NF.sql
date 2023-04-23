@@ -4,17 +4,17 @@ ability VARCHAR(255),
 FOREIGN KEY (name) REFERENCES temp_p(name))
 
 INSERT INTO pokemon_abilities (name, ability)
-SELECT name, TRIM(SUBSTR(abilities, start, IFNULL(NULLIF(INSTR(abilities, ',', start), 0), LENGTH(abilities) + 1) - start))
+SELECT name, TRIM(SUBSTR(abilities, start, IFNULL(NULLIF(INSTR(abilities, ', ', start), 0), LENGTH(abilities) + 1) - start)) AS ability
 FROM (
-  SELECT name, abilities, 1 AS start
-  FROM temp_p
-  WHERE abilities LIKE '%,%'
-  UNION ALL
-  SELECT name, ability, 1 AS start
-  FROM temp_p
-  WHERE abilities NOT LIKE '%,%'
+  SELECT name, REPLACE(abilities, '[', '') AS abilities, 1 AS start
+  FROM imported_pokemon_data
 ) AS t
-ORDER BY name, start;
+WHERE abilities NOT LIKE '%]'
+UNION ALL
+SELECT name, TRIM(REPLACE(SUBSTR(abilities, INSTR(abilities, ', ') + 1), ']', '')) AS ability
+FROM imported_pokemon_data
+WHERE abilities LIKE '%]'
+ORDER BY name, ability;
 ALTER TABLE temp_p
 DROP COLUMN abilties;
 
