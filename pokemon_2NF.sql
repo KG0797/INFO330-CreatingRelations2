@@ -13,11 +13,25 @@ CREATE TABLE Pokemon(
   is_legendary BOOLEAN
 );
 
+CREATE TABLE pokemon_stats(
+  pokedex_number INT,
+  hp,
+  attack,
+  defense,
+  sp_attack,
+  sp_defense,
+  speed
+);
+  
+CREATE TABLE against(
+  against_type VARCHAR(20),
+  FOREIGN KEY(against_type) REFERENCES type(
+  
+  
 
 CREATE TABLE type(
   pokedex_number INT,
-  slot INT,
-  type VARCHAR(20),
+  type TEXT,
   FOREIGN KEY(pokedex_number) REFERENCES imported_pokemon_data(pokedex_number)
   
   
