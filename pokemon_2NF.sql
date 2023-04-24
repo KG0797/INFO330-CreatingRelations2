@@ -24,8 +24,13 @@ CREATE TABLE pokemon_stats(
 );
   
 CREATE TABLE against(
-  against_type VARCHAR(20),
-  FOREIGN KEY(against_type) REFERENCES type(
+  pokedex_number INT,
+  attacking_type_id INT,
+  against_type_id INT,
+  multiplier DECIMAL(2,1),
+  PRIMARY KEY (pokedex_number, attacking_type_id, against_type_id),
+  FOREIGN KEY(against_type_id) REFERENCES types(type1),
+  FOREIGN KEY(attacking_type_id) REFERENCES types(type2));
   
   
 
