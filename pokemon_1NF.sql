@@ -2,11 +2,12 @@ CREATE TABLE pokemon_abilities(
 pokedex_number INT,
 name STRING,
 ability STRING,
+seperate_abilities STRING,
 FOREIGN KEY (name) REFERENCES imported_pokemon_data(name),
 FOREIGN KEY (pokedex_number) REFERENCES imported_pokemon_data(pokedex_number));
 
 
-WITH RECURSIVE split (pokedex_number, name, abilities, separate_abilities) AS (
+WITH pokemon_abilities (pokedex_number, name, abilities, separate_abilities) AS (
 SELECT pokedex_number, name, '' AS abilities, abilities||',' AS separate_abilities
 FROM imported_pokemon_data
 UNION ALL
