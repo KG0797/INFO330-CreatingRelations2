@@ -19,12 +19,12 @@ WHERE separate_abilities != ''
 INSERT INTO pokemon_abilities(pokedex_number, name, ability)
 SELECT pokedex_number, name, abilities FROM split
 WHERE abilities != ''
-ORDER BY pokedex_number, name;
+ORDER BY split.name;
 
 
-SELECT pokemon_abilities.* FROM pokemon_abilities AS pa
-LEFT JOIN imported_pokemon_data AS ipd ON pa.ability = ipd.abilities AND pa.name = ipd.name AND pa.pokedex_number = ipd.pokedex_number;
-
+SELECT imported_pokemon_data.*, pokemon_abilities.ability 
+FROM imported_pokemon_data
+LEFT JOIN pokemon_abilities ON imported_pokemon_data.pokedex_number = pokemon_abilities.pokedex_number
 ALTER TABLE imported_pokemon_data
 DROP COLUMN abilties;
 
