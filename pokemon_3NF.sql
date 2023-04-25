@@ -1,3 +1,5 @@
+-- create a new table that stores the pokemon type to its corresponding against_x columns
+-- all the against_x columns depends on the primary key(pokemon_type)
 CREATE TABLE if not EXISTS type_against (
   pokemon_type STRING PRIMARY KEY, 
   against_bug FLOAT,
@@ -20,7 +22,8 @@ CREATE TABLE if not EXISTS type_against (
   against_water FLOAT
 );
 
---
+--select and insert the columns from imported_pokemon_data table into type_against table 
+--the condition of select is the pokemon with 2 types and pokemon with type1 and type2 is null. 
 INSERT INTO  type_against
 SELECT * FROM (select case when type2 is not null then type1||'&'||type2 else type1 end  AS pokemon_type,
 against_bug,
