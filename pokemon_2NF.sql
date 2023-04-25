@@ -17,7 +17,7 @@ CREATE TABLE type_against (
   
   FOREIGN KEY(type1) REFERENCES imported_pokemon_data(type1),
   FOREIGN KEY(type2) REFERENCES imported_pokemon_data(type2),
-  FOREIGN KEY(
+  PRIMARY KEY(type1, type2)
 );
   
 INSERT INTO types(pokedex_number, name)
