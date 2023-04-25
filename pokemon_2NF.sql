@@ -9,7 +9,9 @@ CREATE TABLE Pokemon(
   capture_rate INT,
   base_egg_steps INT,
   base_happiness INT,
+  base_total INT,
   experience_growth INT,
+  generation INT,
   is_legendary BOOLEAN
 );
 
