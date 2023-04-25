@@ -22,11 +22,9 @@ WHERE abilities != ''
 ORDER BY pokedex_number, name;
 
 
-SELECT imported_pokemon_data.*, pokemon_abilities.ability 
-FROM imported_pokemon_data AS ipd
-LEFT JOIN pokemon_abilities AS pa
-ON ipd.pokedex_number = pa.pokedex_number AND ipd.name = pa.name
-WHERE pa.ability IS NULL;
+SELECT pokemon_abilities.* FROM pokemon_abilities AS pa
+LEFT JOIN imported_pokemon_data AS ipd ON pa.ability = ipd.abilities AND pa.name = ipd.name AND pa.pokedex_number = ipd.pokedex_number;
+
 ALTER TABLE imported_pokemon_data
 DROP COLUMN abilties;
 
