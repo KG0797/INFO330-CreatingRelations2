@@ -1,6 +1,6 @@
-INSERT INTO imported_pokemon_data (pokedex_number, name, type1, attack, defense, hp, sp_attack, sp_defense, speed, generation)
-VALUES (802, 'Huskichu', 'Mascot'
-VALUES (803, 'Cougarite', 'Mascot', 5, 78, 60, 45, 56, 50, 1)
+INSERT INTO pokemon_info (pokedex_number, name, type1, attack, defense, hp, sp_attack, sp_defense, speed, generation)
+VALUES (802, 'Huskichu', 'Mascot', 34, 110, 130, 160, 110, 200, 2)
+VALUES (803, 'Cougarite', 'Mascot', 0, 5, 60, null, 10, 50, 1)
 
 CREATE TABLE trainer(
   id INT PRIMARY KEY,
