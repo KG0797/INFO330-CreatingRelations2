@@ -26,6 +26,6 @@ SELECT  pokedex_number,name,ability_1 AS ability FROM split_abilities
 UNION ALL
 SELECT  pokedex_number,name,ability_2 AS ability FROM split_abilities WHERE ability_2 IS NOT NULL
 UNION ALL
-SELECT pokedex_number,name,ability_3 AS ability FROM split_abilities WHERE ability_3 IS NOT NULL)
+SELECT pokedex_number,name,ability_3 AS ability FROM split_abilities WHERE ability_3 IS NOT NULL) AS abilities 
 WHERE ability>'';
 
