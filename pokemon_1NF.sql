@@ -6,7 +6,7 @@ ability string);
 
 -- using recursion to split the abilities column value for pokemon have multiple ability, then insert into the new ability table.
 INSERT INTO ability_table
-SELECT pokedex_number,name,TRIM(TRIM(ability,'[' ),']') AS ability FROM ( WITH split_abilities AS (
+SELECT pokedex_number,name,TRIM(TRIM(ability,'['),']') AS ability FROM ( WITH split_abilities AS (
     SELECT 
            pokedex_number,name,SUBSTR(abilities, 1, INSTR(abilities, ',') - 1) AS ability_1,
            CASE WHEN INSTR(SUBSTR(abilities, INSTR(abilities, ',') + 1), ',') = 0 THEN
