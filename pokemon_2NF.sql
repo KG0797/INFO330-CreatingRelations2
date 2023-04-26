@@ -26,7 +26,9 @@ type2 string
 
 -- select the columns for pokemon_info from imported_pokemon_data
 INSERT INTO pokemon_info
-SELECT name,
+SELECT 
+pokedex_number,
+name,
 attack,
 base_egg_steps,
 base_happiness,
