@@ -20,8 +20,7 @@ speed int,
 weight_kg float,
 generation int,
 is_legendary boolean,
-type1 string,
-type2 string
+pokemon_type string
 );
 
 -- select the columns for pokemon_info from imported_pokemon_data
@@ -46,6 +45,5 @@ speed,
 weight_kg,
 generation,
 is_legendary,
-type1,
-type2
+case when type2> '' then type1||'&'||type2 else type1 end 
 FROM imported_pokemon_data;
