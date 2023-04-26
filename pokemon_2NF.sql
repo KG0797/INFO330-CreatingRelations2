@@ -1,7 +1,8 @@
 -- create a new table that include all the basic information of a pokemon 
 --from knowing the name(the primary key) of the pokemon
 CREATE TABLE if not EXISTS pokemon_info (
-name string PRIMARY KEY,
+pokedex_number int PRIMARY KEY,
+name string,
 attack int,
 base_egg_steps int,
 base_happiness int,
