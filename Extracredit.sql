@@ -1,6 +1,6 @@
 INSERT INTO imported_pokemon_data (pokedex_number, name, type1, attack, defense, hp, sp_attack, sp_defense, speed, generation)
 VALUES (802, 'Huskichu', 'Mascot'
-VALUES (803, 'Cougarite', 'Mascot', 'Slow Attack', 78, 60, 45, 56, 50, 1)
+VALUES (803, 'Cougarite', 'Mascot', 5, 78, 60, 45, 56, 50, 1)
 
 CREATE TABLE trainer(
   id INT PRIMARY KEY,
@@ -14,10 +14,20 @@ CREATE TABLE favorite_pokemon_types(
 );
 CREATE TABLE pokemon_team(
   id INT,
-  pokemon_member STRING,
+  pokemon1 STRING,
+  pokemon2 STRING,
+  pokemon3 STRING,
+  pokemon4 STRING,
+  pokemon5 STRING,
+  pokemon6 STRING,
+  pokemon7 STRING,
+  pokemon8 STRING,
+  pokemon9 STRING,
+  pokemon10 STRING,
   FOREIGN KEY(id) REFERENCES trainer(id)
 );
-        
+
+
 INSERT INTO trainer(id, first_name, last_name)
 VALUES (1, 'Ted', 'Neward'),
        (2, 'Justin', 'Dong'),
@@ -39,18 +49,4 @@ INSERT INTO pokemon_team (id, pokemon1, pokemon2,  pokemon3,  pokemon4, pokemon5
          
                 
                 
- CREATE TABLE pokemon_team(
-  id INT,
-  pokemon1 STRING,
-  pokemon2 STRING,
-  pokemon3 STRING,
-  pokemon4 STRING,
-  pokemon5 STRING,
-  pokemon6 STRING,
-  pokemon7 STRING,
-  pokemon8 STRING,
-  pokemon9 STRING,
-  pokemon10 STRING,
-  FOREIGN KEY(id) REFERENCES trainer(id)
-);
-
+ 
