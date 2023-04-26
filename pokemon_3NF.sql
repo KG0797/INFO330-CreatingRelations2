@@ -19,7 +19,9 @@ CREATE TABLE if not EXISTS type_against (
   against_psychic FLOAT,
   against_rock FLOAT,
   against_steel FLOAT,
-  against_water FLOAT
+  against_water FLOAT,
+  FOREIGN KEY(type1) REFERENCES pokemon_info(type1)
+  FOREIGN KEY (type2) REFERENCES pokemon_info(type2)
 );
 
 --select and insert the columns from imported_pokemon_data table into type_against table 
