@@ -1,8 +1,10 @@
+-- create a new table to split apart the abilities column value 
 CREATE TABLE if not EXISTS ability_table (
 pokedex_number int,
 name string,
 ability string);
 
+-- using recursion to split the abilities column value for pokemon have multiple ability, then insert into the new ability table.
 INSERT INTO ability_table
 SELECT pokedex_number,name,TRIM(TRIM(ability,'[' ),']') AS ability FROM ( WITH split_abilities AS (
     SELECT 
@@ -26,8 +28,4 @@ SELECT  pokedex_number,name,ability_2 AS ability FROM split_abilities WHERE abil
 UNION ALL
 SELECT pokedex_number,name,ability_3 AS ability FROM split_abilities WHERE ability_3 IS NOT NULL)
 WHERE ability>'';
-
-ALTER TABLE imported_pokemon_data
-DROP COLUMN abilties;
-
 
