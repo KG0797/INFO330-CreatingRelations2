@@ -19,14 +19,12 @@ CREATE TABLE if not EXISTS type_against (
   against_psychic FLOAT,
   against_rock FLOAT,
   against_steel FLOAT,
-  against_water FLOAT,
-  FOREIGN KEY(type1) REFERENCES pokemon_info(type1)
-  FOREIGN KEY (type2) REFERENCES pokemon_info(type2)
+  against_water FLOAT
 );
 
 --select and insert the columns from imported_pokemon_data table into type_against table 
 --the condition of select is the pokemon with 2 types and pokemon with type1 and type2 is null. 
-INSERT INTO  type_against
+INSERT INTO type_against
 SELECT * FROM (select case when type2> '' then type1||'&'||type2 else type1 end  AS pokemon_type,
 against_bug,
 against_dark,
